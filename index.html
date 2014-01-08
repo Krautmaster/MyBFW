@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="webstorage.manifest">
+
+<head>
+    <title>Mein BFW</title>
+	<meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="themes/BFW.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile-1.4.0.min.css" />
+	<link rel="stylesheet" href="themes/BFW Stylesheet.css" />
+    <script src="libs/jquery-1.8.3.min.js"></script>
+    <script src="libs/jquery.mobile-1.4.0.min.js"></script>
+	<script src="scripts/newspage.js"></script>
+	<script src="scripts/infopage.js"></script>
+    <script src="scripts/leisurepage.js"></script>
+	<script src="scripts/socialpage.js"></script>
+	<script src="scripts/contactpage.js"></script>
+	<script>
+		var infoContentPages = new Array(
+		"http://85.25.246.142/dhbw/InfoContent/BFW.xml", 
+		"http://85.25.246.142/dhbw/InfoContent/HSK.xml",
+		"http://85.25.246.142/dhbw/InfoContent/Rollstuhlfahrer.xml"
+		);
+	</script>
+    <script>
+        function setStartPageContentHeight() {
+            var header = $("div[data-role=header]:first");
+            var footer = $("div[data-role=footer]:first");
+            // -35 verhindert Scrollbar
+            var height = footer[0].offsetTop - header[0].offsetHeight - 35;
+            var content = $("div[data-role=content]:first").css("height", height);
+        }
+
+        $(document).ready(function () {
+            setStartPageContentHeight();
+
+            $("a.tile").hover(
+                function () {
+                    var image = $(this).find("img");
+                    var url = image.attr("src");
+                    url = url.replace("-black.", "-white.");
+                    image.attr("src", url);
+                },
+                function () {
+                    var image = $(this).find("img");
+                    var url = image.attr("src");
+                    url = url.replace("-white.", "-black.");
+                    image.attr("src", url);
+                });
+
+            $(window).on("orientationchange", function () {
+                setStartPageContentHeight();
+            });
+        });
+    </script>
+    <!-- Hallo Welt! -->
+</head>
+<body>
+
+    <!-- STARTSEITE ------------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="homepage" data-theme="d" >
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="home">Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content" class="centerContent">
+            <table class="tile-table">
+                <tr class="tile-row">
+                    <td class="tile-cell"><a href="#newspage" class="tile" onclick="loadData_newspage('newsContent', 'http://85.25.246.142/dhbw/HomeContent/Home.xml', 'Article')"><span><img src="themes/images/icons-png/comment-black.png" />News</span></a></td>
+                    <td class="tile-cell"><a href="#infopage" class="tile" onclick="loadData_infopage('infoContent', infoContentPages, 'Article')"><span><img src="themes/images/icons-png/info-black.png" />Informationen</span></a></td>
+                </tr>
+                <tr class="tile-row">
+                    <td class="tile-cell"><a href="#menupage" class="tile"><span><img src="themes/images/icons-png/calendar-black.png" />Speiseplan</span></a></td>
+                    <td class="tile-cell"><a href="#leisurepage" class="tile" onclick="loadData_leisurepage('leisureContent', 'http://85.25.246.142/dhbw/FreizeitContent/Freizeit.xml', 'Article')"><span><img src="themes/images/icons-png/tag-black.png" />Freizeitangebot</span></a></td>
+                </tr>
+                <tr class="tile-row">
+                    <td class="tile-cell"><a href="#socialpage" class="tile" onclick="loadData_socialpage('socialContent', 'http://85.25.246.142/dhbw/SozialesContent/Soziales.xml', 'Article')"><span><img src="themes/images/icons-png/eye-black.png" />Soziales</span></a></td>
+                    <td class="tile-cell"><a href="#contactpage" class="tile"><span><img src="themes/images/icons-png/mail-black.png" />Kontakt</span></a></td>
+                </tr>
+            </table>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- STARTSEITE ------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- NEWS ------------------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="newspage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="comment">News</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <div id="newsContent">
+                <!-- Hier collapsibles mit listview einfügen gemäß XML Inhalt -->
+                <!-- http://85.25.246.142/dhbw/HomeContent/Home.xml -->
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- NEWS ------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- FREIZEITANGEBOT -------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="leisurepage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="tag">Freizeitangebot</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <div id="leisureContent">
+                <!-- Hier collapsibles mit listview einfügen gemäß XML Inhalt -->
+                <!-- http://85.25.246.142/dhbw/FreizeitContent/Freizeit.xml -->
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- FREIZEITANGEBOT -------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- SOZIALES --------------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="socialpage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="eye">Soziales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <div id="socialContent">
+                <!-- Hier collapsibles mit listview einfügen gemäß XML Inhalt -->
+                <!-- http://85.25.246.142/dhbw/SozialesContent/Soziales.xml -->
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- SOZIALES --------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- INFORMATIONEN ---------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="infopage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="info">Informationen</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+			<div id="infoContent">
+                <!-- Hier collapsibles mit listview einfügen gemäß XML Inhalte -->
+                <!-- siehe infoContentPages in Header -->
+			</div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- INFORMATIONEN ---------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- KONTAKT ---------------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="contactpage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="mail">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- KONTAKT ---------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- SPEISEPLAN ------------------------------------------------------------------------------------------------------------------------- -->
+    <div data-role="page" id="menupage" data-theme="d">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="calendar">Speiseplan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <img src="http://85.25.246.142/dhbw/SpeiseplanContent/speiseplan.png" class=" autoScaleImg" />
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- SPEISEPLAN ------------------------------------------------------------------------------------------------------------------------- -->
+</body>
+<script>
+function setElement(elementID, content)
+{	
+	$('#'+elementID).html(content);
+	$('#'+elementID).enhanceWithin();
+}
+</script>
+</html>
