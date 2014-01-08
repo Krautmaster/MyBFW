@@ -26,7 +26,7 @@
         function setStartPageContentHeight() {
             var header = $("div[data-role=header]:first");
             var footer = $("div[data-role=footer]:first");
-            // -35 verhindert Scrollbar
+            // -35 verhindert Scrollbar (merci)
             var height = footer[0].offsetTop - header[0].offsetHeight - 35;
             var content = $("div[data-role=content]:first").css("height", height);
         }
