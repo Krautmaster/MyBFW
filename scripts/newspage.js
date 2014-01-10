@@ -4,7 +4,8 @@ function loadData_newspage(elementID, url, tagname) {
         type: "GET",
         url: url,
         crossDomain: true,
-        cache:false
+        cache: false,
+        dataType:"xml"
     }).done(function (result) {
         dataLoaded_newspage(result, elementID, tagname);
     }).fail(function (result, status, errormessage) {

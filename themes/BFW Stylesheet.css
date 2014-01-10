@@ -114,3 +114,6 @@ table.tile-table{
     background-color:#45a74f!important;
 }
 
+*[data-role=footer] a[data-role=button]{
+    margin-right:15px!important;
+}
