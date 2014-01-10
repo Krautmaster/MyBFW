@@ -23,6 +23,41 @@
 		);
 	</script>
     <script>
+        // Soll dafür sorgen, dass Ajax-Aufrufe auch bei Mobilgeräten über Domain-Grenzen hinweg gemacht werden können -> XML-Aufrufe.
+        $(document).on("mobileinit", function () {
+            $.support.cors = true;
+            $.mobile.allowCrossDomainPages = true;
+        });
+
+        $(document).ready(function () {
+            setStartPageContentHeight();
+
+            // Sorgt dafür, dass die Icons in den Kacheln der Startseite beim "Mouse in" weiß werden und beim "Mouse out" wieder schwarz.
+            $("a.tile").hover(function () {
+                    recolorTileImage($(this), "-black.", "-white.");
+                }, function () {
+                    recolorTileImage($(this), "-white.", "-black.");
+                });
+
+            // Sorgt dafür, dass die Berechnung der Inhaltshöhe bei Änderung der Orientierung (mobil) oder Änderung der Größe des Browsers (PC) neu ausgeführt wird.
+            $(window).on("orientationchange", function () {
+                setStartPageContentHeight();
+            }).on("resize", function () {
+                setStartPageContentHeight();
+            });
+        });
+
+        // Färbt die Icons bei den Kacheln auf der Startseite weiß bzw. schwarz.
+        // Funktioniert dadurch, dass die Icons in schwarz und weiß vorhanden sind und nur unterschiedliche Dateinamen haben.
+        function recolorTileImage(tile, from, to) {
+            var image = tile.find("img");
+            var url = image.attr("src");
+            url = url.replace(from, to);
+            image.attr("src", url);
+        }
+
+        // Sorgt dafür, dass der Content-Bereich der Startseite, die Seite immer komplett füllt
+        // Höhe des Contents = Position des Footers - Höhe des Headers - 35
         function setStartPageContentHeight() {
             var header = $("div[data-role=header]:first");
             var footer = $("div[data-role=footer]:first");
@@ -30,27 +65,6 @@
             var height = footer[0].offsetTop - header[0].offsetHeight - 35;
             var content = $("div[data-role=content]:first").css("height", height);
         }
-        $(document).ready(function () {
-            setStartPageContentHeight();
-
-            $("a.tile").hover(
-                function () {
-                    var image = $(this).find("img");
-                    var url = image.attr("src");
-                    url = url.replace("-black.", "-white.");
-                    image.attr("src", url);
-                },
-                function () {
-                    var image = $(this).find("img");
-                    var url = image.attr("src");
-                    url = url.replace("-white.", "-black.");
-                    image.attr("src", url);
-                });
-
-            $(window).on("orientationchange", function () {
-                setStartPageContentHeight();
-            });
-        });
     </script>
     <!-- Hallo Welt! -->
 </head>
@@ -234,12 +248,11 @@
         </div>
     </div>
     <!-- SPEISEPLAN ------------------------------------------------------------------------------------------------------------------------- -->
+    <script>
+        function setElement(elementID, content) {
+            $('#' + elementID).html(content);
+            $('#' + elementID).enhanceWithin();
+        }
+    </script>
 </body>
-<script>
-function setElement(elementID, content)
-{	
-	$('#'+elementID).html(content);
-	$('#'+elementID).enhanceWithin();
-}
-</script>
 </html>

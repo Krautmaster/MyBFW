@@ -1,9 +1,15 @@
 function loadData_newspage(elementID, url, tagname) {
 
-	$.ajax({url:url, 
-	    success: function (result) { dataLoaded_newspage(result, elementID, tagname); },
-	    error: function (result, status, errormessage) { dataLoadedFailed_newspage(elementID, url, result, status, errormessage); }
-			});
+    $.ajax({
+        type: "GET",
+        url: url,
+        crossDomain: true,
+        cache:false
+    }).done(function (result) {
+        dataLoaded_newspage(result, elementID, tagname);
+    }).fail(function (result, status, errormessage) {
+        dataLoadedFailed_newspage(elementID, url, result, status, errormessage);
+    });
 }
 
 /* Laden der Inhalte unterhalb der Elemente 'Article' */
