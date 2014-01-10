@@ -27,7 +27,7 @@ function dataLoaded_newspage(response, elementID, tagname) {
 /* Verhalten bei fehlerhaftem Laden*/
 function dataLoadedFailed_newspage(elementID, url, response, status, errormessage) {
 
-    setElement(elementID, "<div>Error loading '" + url + "':<br/>" + errormessage + "</div>");
+    setElement(elementID, "<div>Error loading '" + url + "': " + status + "<br/>" + errormessage + "</div>");
 
 }
 

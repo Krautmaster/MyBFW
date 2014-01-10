@@ -32,7 +32,7 @@
         $(document).ready(function () {
             setStartPageContentHeight();
 
-            // Sorgt dafür, dass die Icons in den Kacheln der Startseite beim "Mouse in" weiß werden und beim "Mouse out" wieder schwarz.
+            // Sorgt dafür, dass die Icons in den Kacheln des Menüs beim "Mouse in" weiß werden und beim "Mouse out" wieder schwarz.
             $("a.tile").hover(function () {
                     recolorTileImage($(this), "-black.", "-white.");
                 }, function () {
@@ -45,9 +45,11 @@
             }).on("resize", function () {
                 setStartPageContentHeight();
             });
+            
+            $('#start').click();
         });
 
-        // Färbt die Icons bei den Kacheln auf der Startseite weiß bzw. schwarz.
+        // Färbt die Icons bei den Kacheln im Menü weiß bzw. schwarz.
         // Funktioniert dadurch, dass die Icons in schwarz und weiß vorhanden sind und nur unterschiedliche Dateinamen haben.
         function recolorTileImage(tile, from, to) {
             var image = tile.find("img");
@@ -56,14 +58,14 @@
             image.attr("src", url);
         }
 
-        // Sorgt dafür, dass der Content-Bereich der Startseite, die Seite immer komplett füllt
+        // Sorgt dafür, dass der Content-Bereich des Menüs, die Seite immer komplett füllt
         // Höhe des Contents = Position des Footers - Höhe des Headers - 35
         function setStartPageContentHeight() {
-            var header = $("div[data-role=header]:first");
-            var footer = $("div[data-role=footer]:first");
+            var header = $("#homepage div[data-role=header]");
+            var footer = $("#homepage div[data-role=footer]");
             // -35 verhindert Scrollbar (merci)
             var height = footer[0].offsetTop - header[0].offsetHeight - 35;
-            var content = $("div[data-role=content]:first").css("height", height);
+            var content = $("#homepage div[data-role=content]").css("height", height);
         }
     </script>
     <!-- Hallo Welt! -->
@@ -75,14 +77,14 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="home">Startseite</a></li>
+                    <li><a href="#" data-role="button" class="ui-btn-active ui-state-persist" data-icon="grid">Menü</a></li>
                 </ul>
             </div>
         </div>
         <div data-role="content" class="centerContent">
             <table class="tile-table">
                 <tr class="tile-row">
-                    <td class="tile-cell"><a href="#newspage" class="tile" onclick="loadData_newspage('newsContent', 'http://85.25.246.142/dhbw/HomeContent/Home.xml', 'Article')"><span><img src="themes/images/icons-png/comment-black.png" />News</span></a></td>
+                    <td class="tile-cell"><a id="start" href="#newspage" class="tile" onclick="loadData_newspage('newsContent', 'http://85.25.246.142/dhbw/HomeContent/Home.xml', 'Article')"><span><img src="themes/images/icons-png/comment-black.png" />News</span></a></td>
                     <td class="tile-cell"><a href="#infopage" class="tile" onclick="loadData_infopage('infoContent', infoContentPages, 'Article')"><span><img src="themes/images/icons-png/info-black.png" />Informationen</span></a></td>
                 </tr>
                 <tr class="tile-row">
@@ -123,7 +125,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
@@ -148,7 +150,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
@@ -173,7 +175,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
@@ -198,7 +200,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
@@ -220,7 +222,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
@@ -242,7 +244,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar" data-iconpos="left">
                 <ul>
-                    <li><a href="#homepage" data-role="button" data-icon="back">Zurück zur Startseite</a></li>
+                    <li><a href="#homepage" data-role="button" data-icon="grid">Zum Menü</a></li>
                 </ul>
             </div>
         </div>
