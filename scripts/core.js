@@ -78,11 +78,11 @@ function defaultPageLoader(elementID)
                 }
             }
         }
+        setCookie(elementID, result);
         setElement(elementID, result);
     }
 
     // Methode, die bei erfolgreichem Laden einer XML-Datei das Parsen aller Artikel in HTML veranlasst.
-    // to do: Ergebnis cachen
     function loadSuccess(response, tagName)
     {
         var result = "";
@@ -94,10 +94,11 @@ function defaultPageLoader(elementID)
     }
 
     // Methode, die bei fehlgeschlagenem Laden einer XML-Datei eine Fehlermeldung aufruft.
-    // to do: Cache abrufen bevor Fehlermeldung ausgegeben wird
     function loadError(url, result, status, errorMessage)
     {
-        return "<div>Error loading '" + url + "': " + status + "<br/>" + errorMessage + "</div>";
+        var cookie = getCookie(elementID);
+        if (cookie != "") { return cookie; }
+        else { return "<div>Error loading '" + url + "': " + status + "<br/>" + errorMessage + "</div>"; }
     }
 
     // Ließt den Inhalt eines einzelnen XML-Artikels aus und veranlasst damit das Parsen in HTML.
@@ -174,3 +175,16 @@ function defaultPageLoader(elementID)
     }
 }
 
+function setCookie(cname, cvalue) {
+    document.cookie = "{D9D63B3F-38F6-4E22-9E9E-B063BEEB9887}" + cname + "=" + cvalue + "; ";
+}
+
+function getCookie(cname) {
+    var name = "{D9D63B3F-38F6-4E22-9E9E-B063BEEB9887}" + cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
